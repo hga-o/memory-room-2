@@ -1,0 +1,162 @@
+<html>
+
+<head>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+        #draggable {
+            width: 100px;
+            height: 100px;
+        }
+        
+        #welcome img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+        }
+        
+        #spotify {
+            position: absolute;
+            right: 100px;
+            bottom: 100px;
+        }
+        
+        .slider {
+            position: absolute;
+            width: 300px;
+            height: auto;
+            top: 300px;
+            left: 100px;
+        }
+        
+        .sp img {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            z-index: 4;
+        }
+        
+        .left {
+            position: absolute;
+            left: 0px;
+            width: 40%;
+            height: 270px;
+            z-index: 5;
+        }
+        
+        .right {
+            position: absolute;
+            right: 0px;
+            width: 40%;
+            height: 270px;
+            z-index: 5;
+        }
+        
+        img {
+            display: inline-block;
+            margin: -10px;
+            width: auto;
+            height: 120%;
+            z-index: -1;
+        }
+        
+        .box {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+/*            border: 1px solid black;*/
+        }
+        
+        #identifier {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: green;
+            z-index: 1;
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="welcome"><img src="images/welcome.png"></div>
+
+    <a href="/images/welcome.png" download>DOWNLOAD</a>
+
+    <iframe id="spotify" src="https://open.spotify.com/embed/user/1238603263/playlist/5VXro1K2YTLVW4Mtpcw2Bx" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+
+    <div class="slider">
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="sp"><img src="images/journal/01.jpeg"></div>
+        <div class="sp"><img src="images/journal/02.jpeg"></div>
+        <div class="sp"><img src="images/journal/03.jpeg"></div>
+        <div class="sp"><img src="images/journal/04.jpeg"></div>
+        <div class="sp"><img src="images/journal/05.jpeg"></div>
+        <div class="sp"><img src="images/journal/06.jpeg"></div>
+        <div class="sp"><img src="images/journal/07.jpeg"></div>
+        <div class="sp"><img src="images/journal/08.jpeg"></div>
+    </div>
+
+    <div id="featherpen" class="box">
+        <div id="identifier"></div>
+        <img src="images/featherpen.png">
+    </div>
+
+    <script>
+        $(document).ready(function () {
+
+            //            $("#featherpen").draggable();
+
+            $("#featherpen").hover(function () {
+                $("#identifier").show();
+
+            }, function () {
+                $("#identifier").hide();
+            });
+
+            $('.sp').first().addClass('active');
+            $('.sp').hide();
+            $('.active').show();
+
+            $('.right').click(function () {
+
+                $('.active').removeClass('active').addClass('oldActive');
+
+                if ($('.oldActive').is(':last-child')) {
+                    $('.sp').first().addClass('active');
+                } else {
+                    $('.oldActive').next().addClass('active');
+                }
+
+                $('.oldActive').removeClass('oldActive');
+                $('.sp').hide();
+                $('.active').show();
+
+            });
+
+            $('.left').click(function () {
+                $('.active').removeClass('active').addClass('oldActive');
+                if ($('.oldActive').is(':first-child')) {
+                    $('.sp').last().addClass('active');
+                } else {
+                    $('.oldActive').prev().addClass('active');
+                }
+                $('.oldActive').removeClass('oldActive');
+                $('.sp').hide();
+                $('.active').show();
+            });
+        });
+    </script>
+
+    <body>
+
+</html>
